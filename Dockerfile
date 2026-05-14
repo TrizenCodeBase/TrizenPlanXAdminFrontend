@@ -1,15 +1,9 @@
-# syntax=docker/dockerfile:1
-# CapRover: deploy from this folder (captain-definition points here).
-# Optional Vite build args — set under App Config → Build arguments in CapRover if you add VITE_* vars.
+# CapRover: build from this app folder. Use "Force rebuild" in CapRover when you need a clean image.
+# Optional: set VITE_API_URL (or other VITE_*) under App Config → Build arguments if your app uses them.
 
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-ARG CACHEBUST=1
-ARG CAPROVER_GIT_COMMIT_SHA=unknown
-RUN echo "build cache-bust=${CACHEBUST} commit=${CAPROVER_GIT_COMMIT_SHA}"
-
-# Example: ARG VITE_API_URL / ENV for bake-time config
 ARG VITE_API_URL=
 ENV VITE_API_URL=${VITE_API_URL}
 
